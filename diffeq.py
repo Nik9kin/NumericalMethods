@@ -74,3 +74,20 @@ if __name__ == '__main__':
     plt.legend()
     plt.grid()
     plt.show()
+
+
+    def f3(t, x, y, z, s=10, r=28, b=2.667):
+        x_prime = s * (y - x)
+        y_prime = r * x - y - x * z
+        z_prime = x * y - b * z
+        return x_prime, y_prime, z_prime
+
+    sol = euler((0.1, 0.2, 10), f3, dt=0.001, n_steps=50_000)
+    ax = plt.figure().add_subplot(projection='3d')
+
+    ax.plot(sol[:, 1], sol[:, 2], sol[:, 3], lw=0.5)
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    ax.set_title("Lorenz Attractor")
+    plt.show()
